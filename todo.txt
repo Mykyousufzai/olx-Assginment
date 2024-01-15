@@ -1,0 +1,97 @@
+import './App.css';
+import { useState } from 'react';
+
+
+function App() {
+  const   [list,setList] = useState([])
+  const   [inputText,setInputText] = useState()
+  const   [editMode,setEditMode] = useState(false)
+  const   [currentIndex,setcurrentIndex] = useState()
+ 
+function addItem(){
+  //Purpose: INPUT ki Value List mien PUSH karwani Hai.
+  //Majod: LIST , INPUT la Majod :
+  const CopyList = [...list]
+  CopyList.push(inputText)
+  setList(CopyList)
+
+  setInputText('')
+}
+
+function updateText(e){
+ const value = e.target.value
+ setInputText(value)
+}
+
+function deleteItem(index){
+  //Purpose:jis INDEX pe click hua , Usko LIST mien Sy SPLICE karna hai
+  // Majod: List majod , INDEX: La Majod  
+  const CopyList = [...list]
+  CopyList.splice(index,1)
+  setList(CopyList)
+}
+
+function editItem(index){
+  //Purpose:
+  //1. jis index per click ho , uski value input mien chali jaye
+  //2.ADD ka button UPDATE mien change hojae
+  //3. INDEX state mien save krwana hai
+const value =list[index]
+setInputText(value)
+setEditMode(true)
+setcurrentIndex(index)
+
+}
+
+function updateItem(){
+  //purpose:
+//1. UPDATE ka BUTTon EDIT men change hojaega
+//2. LIST Mien INDEX ki value update hojae INPUT say
+setEditMode(false)
+
+const CopyList =[...list]
+CopyList[currentIndex] = inputText
+setList(CopyList)
+
+setInputText('')
+}
+
+function deleteAll(){
+  setList([])
+}
+
+
+  return (
+    <div className="App">
+      <header className="App-header">
+
+
+    <input onChange={updateText}  placeholder='Enter a Comment' value={inputText}></input>
+    
+    { editMode ? <button onClick={updateItem}>Update</button>
+      :
+    <button onClick={addItem}>Add</button>
+}
+
+    <button onClick={deleteAll}>Delete All</button>   
+
+    <ul>
+
+     {list.map(function(item, index){
+      return <li>{item}
+      
+      <button onClick={()=>deleteItem(index)}>Delete</button>
+      <button onClick={()=>editItem(index)}>Edit</button>
+      
+      </li>
+     })} 
+
+    </ul>
+
+        
+      </header>
+    </div>
+  );
+}
+
+export default App;

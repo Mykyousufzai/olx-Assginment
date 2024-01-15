@@ -1,0 +1,61 @@
+
+import './App.css';
+import { useState } from 'react';
+
+function App() {
+  const carList = [{
+    name: 'XYZ',
+    model: ['Javascript', 'React'],
+    color: 'white',
+    features: ['power Window', 'PowerStering']
+  },
+  {
+    name: 'ABC',
+    model: ['AngularJs', 'Ionic'],
+    color: 'white',
+    features: ['power Window', 'PowerStering']
+  },
+  {
+    name: 'EFG',
+    model: ['web development'],
+    color: 'white',
+    features: ['power Window', 'PowerStering']
+  }];
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Hello World
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+        <table className='table' style={{ border: '1px solid black' }}>
+          <thead>
+            <tr>
+              <th style={{ border: '1px solid black' }}>Company</th>
+              <th style={{ border: '1px solid black' }}>Job</th>
+            </tr>
+          </thead>
+          <tbody>
+            {carList.map(function (item) {
+              return <tr>
+                <td style={{ border: '1px solid black' }}>{item.name}</td>
+                <td style={{ border: '1px solid black' }}>{item.model}</td>
+              </tr>
+            })}
+          </tbody>
+        </table>
+      </header>
+    </div>
+  );
+}
+
+export default App;
